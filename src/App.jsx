@@ -339,28 +339,28 @@ function Hero() {
       <Olive className="animate-float-soft pointer-events-none absolute right-[42%] top-[14%] hidden h-12 w-12 sm:block" />
 
       <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
-        <p className="hero-rise mb-5 inline-flex items-center gap-2 rounded-full border border-olive/30 bg-cream/70 px-4 py-1.5 text-sm font-bold uppercase tracking-[0.18em] text-olive" style={{ animationDelay: '0.05s' }}>
+        <p className="hero-rise mb-5 inline-flex items-center gap-2 rounded-full border border-olive/30 bg-cream/70 px-4 py-1.5 text-sm font-bold uppercase tracking-[0.18em] text-olive" style={{ animationDelay: '0.25s' }}>
           <span className="h-2 w-2 animate-pulse-soft rounded-full bg-tomato" />
           {OPENING_TEXT}
         </p>
 
         <h1
           className="hero-rise font-display text-[clamp(3.4rem,15vw,9rem)] font-black leading-[0.9] tracking-tight text-tomato"
-          style={{ animationDelay: '0.15s' }}
+          style={{ animationDelay: '0.35s' }}
         >
           Mortadella
         </h1>
 
         <p
           className="hero-rise mt-4 max-w-xl font-display text-2xl font-medium italic text-ink sm:text-3xl"
-          style={{ animationDelay: '0.3s' }}
+          style={{ animationDelay: '0.5s' }}
         >
           Nápolyi pizza, laza olasz életérzés, kerthelyiségben.
         </p>
 
         <p
           className="hero-rise mt-5 max-w-lg text-lg leading-relaxed text-ink-soft"
-          style={{ animationDelay: '0.45s' }}
+          style={{ animationDelay: '0.65s' }}
         >
           Napokon belül nyitunk – és nem egy fehér terítős éttermet, hanem egy
           igazi olaszos udvart hozunk el neked.
@@ -368,7 +368,7 @@ function Hero() {
 
         <div
           className="hero-rise mt-9 flex flex-col gap-3 sm:flex-row sm:items-center"
-          style={{ animationDelay: '0.6s' }}
+          style={{ animationDelay: '0.8s' }}
         >
           <a
             href={FACEBOOK_URL}

@@ -151,6 +151,13 @@
 .hero-rise {
   opacity: 0;
   animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, transform;
+}
+
+@media (max-width: 767px) {
+  .grain::before {
+    display: none;
+  }
 }
 
 /* ============================================================
