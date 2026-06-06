@@ -80,6 +80,8 @@
   opacity: 0.5;
   mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+  transform: translateZ(0);
+  will-change: opacity;
 }
 
 /* ============================================================
@@ -140,10 +142,10 @@
   to { opacity: 0; pointer-events: none; }
 }
 
-.animate-float-slow { animation: float-slow 7s ease-in-out infinite; }
-.animate-float-soft { animation: float-soft 5.5s ease-in-out infinite; }
-.animate-spin-slow  { animation: spin-slow 48s linear infinite; }
-.animate-pulse-soft { animation: pulse-soft 3.5s ease-in-out infinite; }
+.animate-float-slow { animation: float-slow 7s ease-in-out infinite; will-change: transform; }
+.animate-float-soft { animation: float-soft 5.5s ease-in-out infinite; will-change: transform; }
+.animate-spin-slow  { animation: spin-slow 48s linear infinite; will-change: transform; }
+.animate-pulse-soft { animation: pulse-soft 3.5s ease-in-out infinite; will-change: transform; }
 
 /* Hero belépő – staggered reveal */
 .hero-rise {

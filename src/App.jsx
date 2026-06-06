@@ -279,34 +279,36 @@ function Navbar() {
       {/* Mobil menü */}
       <div
         id="mobile-menu"
-        className={`overflow-hidden bg-cream/98 backdrop-blur-sm transition-[max-height,opacity] duration-400 md:hidden ${
-          open ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+        className={`grid transition-[grid-template-rows] duration-300 ease-in-out md:hidden ${
+          open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
         }`}
       >
-        <ul className="flex flex-col gap-1 px-5 pb-6 pt-2">
-          {NAV_LINKS.map((l) => (
-            <li key={l.id}>
+        <div className="overflow-hidden bg-cream/98">
+          <ul className="flex flex-col gap-1 px-5 pb-6 pt-2">
+            {NAV_LINKS.map((l) => (
+              <li key={l.id}>
+                <a
+                  href={`#${l.id}`}
+                  onClick={() => setOpen(false)}
+                  className="block rounded-xl px-4 py-3 text-lg font-semibold text-ink transition-colors hover:bg-paper hover:text-tomato"
+                >
+                  {l.label}
+                </a>
+              </li>
+            ))}
+            <li className="mt-2">
               <a
-                href={`#${l.id}`}
+                href={FACEBOOK_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setOpen(false)}
-                className="block rounded-xl px-4 py-3 text-lg font-semibold text-ink transition-colors hover:bg-paper hover:text-tomato"
+                className="block rounded-xl bg-tomato px-4 py-3 text-center text-lg font-bold text-cream"
               >
-                {l.label}
+                Kövess minket Facebookon
               </a>
             </li>
-          ))}
-          <li className="mt-2">
-            <a
-              href={FACEBOOK_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setOpen(false)}
-              className="block rounded-xl bg-tomato px-4 py-3 text-center text-lg font-bold text-cream"
-            >
-              Kövess minket Facebookon
-            </a>
-          </li>
-        </ul>
+          </ul>
+        </div>
       </div>
     </header>
   )
