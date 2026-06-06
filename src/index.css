@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+/* ============================================================
+   TÉMA / DESIGN TOKENEK  (Tailwind v4 @theme)
+   Itt állíthatod át a SZÍNEKET és a BETŰTÍPUSOKAT.
+   Pl. bg-cream, text-tomato, bg-olive, font-display ...
+   ============================================================ */
+@theme {
+  /* Betűtípusok */
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Manrope", system-ui, sans-serif;
+
+  /* Mediterrán színpaletta */
+  --color-cream: #faf1dd;       /* meleg krém háttér          */
+  --color-paper: #f3e6c9;       /* papír / homokos bézs       */
+  --color-sand: #ecd9b0;        /* mélyebb bézs               */
+  --color-tomato: #c9442e;      /* paradicsompiros            */
+  --color-tomato-deep: #a3301d; /* mély paradicsom            */
+  --color-olive: #5e6b2b;       /* olívazöld                  */
+  --color-olive-light: #84944a; /* világos olíva              */
+  --color-basil: #41702f;       /* bazsalikom zöld            */
+  --color-lemon: #efb429;       /* citromsárga                */
+  --color-lemon-light: #f6d469; /* halvány citrom             */
+  --color-pond: #5a93a3;        /* halastó kék                */
+  --color-ink: #241b10;         /* sötét szöveg (barnás fekete) */
+  --color-ink-soft: #5a4a32;    /* lágyabb szöveg             */
+  --color-wine: #6e2438;        /* bor árnyalat               */
+}
+
+/* ============================================================
+   ALAP STÍLUSOK
+   ============================================================ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem; /* sticky nav magassága miatt */
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+  }
+
+  /* Akadálymentes, de igényes fókuszállapot */
+  :focus-visible {
+    outline: 3px solid var(--color-tomato);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Mozgáscsökkentés kérése esetén kikapcsoljuk az animációkat */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+/* ============================================================
+   TEXTÚRA: finom szemcse / grain overlay (papír hatás)
+   ============================================================ */
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+}
+
+/* ============================================================
+   SCROLL REVEAL  (a useReveal hook adja hozzá az .is-visible-t)
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   KEYFRAME ANIMÁCIÓK
+   ============================================================ */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+  50%      { transform: translateY(-18px) rotate(var(--r, 0deg)); }
+}
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+  50%      { transform: translateY(-10px) rotate(var(--r, 0deg)); }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes rise {
+  0%   { opacity: 0; transform: translateY(40px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes pulse-soft {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.06); opacity: 0.85; }
+}
+@keyframes steam {
+  0%   { opacity: 0; transform: translateY(0) scaleX(1); }
+  35%  { opacity: 0.7; }
+  100% { opacity: 0; transform: translateY(-26px) scaleX(1.4); }
+}
+@keyframes loading-spin {
+  0%   { transform: rotate(0deg);   animation-timing-function: ease-in-out; }
+  50%  { transform: rotate(180deg); animation-timing-function: ease-in-out; }
+  100% { transform: rotate(360deg); }
+}
+@keyframes loading-fade-out {
+  to { opacity: 0; pointer-events: none; }
+}
+
+.animate-float-slow { animation: float-slow 7s ease-in-out infinite; }
+.animate-float-soft { animation: float-soft 5.5s ease-in-out infinite; }
+.animate-spin-slow  { animation: spin-slow 48s linear infinite; }
+.animate-pulse-soft { animation: pulse-soft 3.5s ease-in-out infinite; }
+
+/* Hero belépő – staggered reveal */
+.hero-rise {
+  opacity: 0;
+  animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ============================================================
+   EGYÉNI GÖRGETŐSÁV
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-paper);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-tomato);
+  border-radius: 9999px;
+  border: 2px solid var(--color-paper);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-tomato-deep);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-tomato) var(--color-paper);
+}
+
+/* ============================================================
+   SEGÉDOSZTÁLYOK
+   ============================================================ */
+.text-stroke-cream {
+  -webkit-text-stroke: 2px var(--color-cream);
+}
+
+/* Vékony szaggatott "kézzel rajzolt" elválasztó */
+.dashed-rule {
+  background-image: linear-gradient(
+    to right,
+    var(--color-olive-light) 0,
+    var(--color-olive-light) 12px,
+    transparent 12px,
+    transparent 22px
+  );
+  background-size: 22px 3px;
+  background-repeat: repeat-x;
+  background-position: left center;
+}
